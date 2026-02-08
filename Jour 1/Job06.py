@@ -1,53 +1,34 @@
-# class Point:
-#     def __init__(self, x, y):
-#         self.x = x
-#         self.y = y
-    
-#     def afficherLesPoints(self):
-#         return str(self.x) + "," + str(self.y)
-    
-#     def afficherX(self):
-#         return self.x
-    
-#     def afficherY(self):
-#         return self.y
-    
-#     def changeX(self, x):
-#         self.x = x
-#         return x
-    
-#     def changeY(self, y ):
-#         self.y = y
-#         return y
-    
-# coordo_v = Point(1,2)
-# coordo_h = Point(3,4)
-
-# print(f" Coordonnées verticales {coordo_v.afficherLesPoints()}")
-# print(f" Coordonnées horizontales {coordo_h.afficherLesPoints()}")
-# print(f" Nouvelles coordonnées verticales de X = {coordo_v.changeX(99)}")
-
-class Animal:
-    def __init__(self):
-        self.age =0
-        self.prenom = ""
+class Commande:
+    def __init__(self, numero_commande):
+        self.__numero_commande = numero_commande
+        self.__liste_plats = {}
+        self.__statut_commande = "En cours"
         
-    def nommer(self, prenom):
-        self.prenom = prenom
-        print(f"Le monstre s'appelle {self.prenom}")
-        return prenom
+    def ajouterPlat(self, nom, prix):
+        self.__liste_plats[nom] = prix
         
-    def vieillir(self):
-        print(f"L'age du monstre est {self.age} an.")
-        self.age +=1
-        print(f"L'age de l'ouragan est {self.age} an.")
-        return
+    def annuler(self):
+        if self.__statut_commande == "En cours":
+            self.__statut_commande = "Annulé"
+        else:
+            pass
         
-
+    def __calculerTotal(self):
+        return sum(self.__liste_plats.values())
+        
+    def afficherCommandeTotal(self):
+        print(f" Le total est : {self.__calculerTotal()}")
+        print(f"Plats : {self.__liste_plats}")
+        print(f"Statut : {self.__statut_commande}")
+        
+    def calculerTVA(self):
+        print(f"TTC : {self.__calculerTotal() * 1.2}")
+        
     
-my_pet = Animal()
+commande_une = Commande(1)
 
-
-# print(f"Elle s'appelle {my_pet.nommer()}. Le plus mignon des petits","chats actuellement sur mon bureau.")
-my_pet.vieillir()
-my_pet.nommer("Cali")
+commande_une.ajouterPlat("Pizza :",12.00)
+commande_une.ajouterPlat("Sauce Tomate :",24.00)
+commande_une.afficherCommandeTotal()
+commande_une.calculerTVA()
+commande_une.annuler()
